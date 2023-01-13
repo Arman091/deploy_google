@@ -36,8 +36,8 @@ function Submit(props) {
       .then((response) => response.json())
       .then((response) => {
         alert("form submitted succesfully");
-        navigate('/')
       });
+      navigate('/')
   };
   return (
     <div>

@@ -233,7 +233,7 @@
   left:275px
   
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 420px) {
   .text_input {
     width: 160px;
     height: 40px;
