@@ -34,7 +34,7 @@ function QuesBody(props) {
           ></input>
         </div>
 
-        <CropOriginalIcon style={{ color: "blue" }} />
+       
 
         <CloseIcon
           style={{ cursor: "pointer" }}
