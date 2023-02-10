@@ -15,55 +15,61 @@ function AddQuesType(props) {
       <input
         type="text"
         className="question"
-        placeholder="Question"
+        placeholder="write Question here"
         value={ques.questionText}
         onChange={(e) => {
           changeQuestion(e.target.value, i);
         }}
       ></input>
-      <CropOriginalIcon style={{ color: "#5f6368" }} />{" "}
-      <Select className="select" style={{ color: "#5f6368", fontSize: "13px" }}>
-        <MenuItem
-          id="text"
-          value="Text"
-          onClick={() => {
-            addQuestionType(i, "text");
-          }}
+      <div>
+        <CropOriginalIcon style={{ color: "#5f6368",marginTop:"10px" }} />{" "}
+        <Select
+          className="select"
+          style={{ color: "#5f6368", fontSize: "13px" }}
+          placeholder="select"
         >
-          {" "}
-          <SubjectIcon style={{ marginRight: "10px" }} /> Paragraph
-        </MenuItem>
-        <MenuItem
-          id="checkbox"
-          value="Checkbox"
-          onClick={() => {
-            addQuestionType(i, "checkbox");
-          }}
-        >
-          <CheckBoxIcon
-            style={{ marginRight: "10px", color: "#70757a" }}
-            checked
-          />
-          Checkboxes
-        </MenuItem>
+          <MenuItem
+            id="text"
+            value="Text"
+            onClick={() => {
+              addQuestionType(i, "text");
+            }}
+          >
+            {" "}
+            <SubjectIcon style={{ marginRight: "10px" }} /> Paragraph
+          </MenuItem>
+          <MenuItem
+            id="checkbox"
+            value="Checkbox"
+            onClick={() => {
+              addQuestionType(i, "checkbox");
+            }}
+          >
+            <CheckBoxIcon
+              style={{ marginRight: "10px", color: "#70757a" }}
+              checked
+            />
+            Checkboxes
+          </MenuItem>
 
-        <MenuItem
-          id="Radio"
-          value="Radio"
-          onClick={() => {
-            addQuestionType(i, "radio");
-          }}
-        >
-          <RadioButtonCheckedIcon
-            style={{ marginRight: "10px", color: "#70757a" }}
-            checked
+          <MenuItem
+            id="Radio"
+            value="Radio"
             onClick={() => {
               addQuestionType(i, "radio");
             }}
-          />
-          Multiple Choice
-        </MenuItem>
-      </Select>
+          >
+            <RadioButtonCheckedIcon
+              style={{ marginRight: "10px", color: "#70757a" }}
+              checked
+              onClick={() => {
+                addQuestionType(i, "radio");
+              }}
+            />
+            Multiple Choice
+          </MenuItem>
+        </Select>
+      </div>
     </div>
   );
 }

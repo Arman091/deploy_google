@@ -204,17 +204,18 @@ function Questions() {
         >
           <AccordionSummary
             aria-controls="panella-content"
-            id="panella-header"
+           
             elevation={1}
-            style={{ width: "100%" }}
+            style={{ width: "100%",opacity:"2" }}
+            disabled={true}
           >
-            {/*++++++++++++++++++++ SAVED QUESTION TOP HERE++++++++++++++++  */}
+            
             {questions[i].open ? <SavedQuestion question={ques} /> : ""}
           </AccordionSummary>
           {/*++++++++++++++++++++ Question  EDITING EDITING SECTION  STARTS HERE++++++++++++++++  */}
           <div className="question_boxes">
             {!questions[i].answer ? (
-              <AccordionDetails className="add_question">
+              <div className="add_question">
                 <AddQuesType
                   changeQuestion={changeQuestion}
                   addQuestionType={addQuestionType}
@@ -241,7 +242,7 @@ function Questions() {
                   AddAnswer={AddAnswer}
                   index={i}
                 />
-              </AccordionDetails>
+              </div>
             ) : (
               <Answer
                 ques={ques}
@@ -252,15 +253,16 @@ function Questions() {
               />
             )}
             {!ques.answer ? (
-              <div className="question_edit">
-                <AddCircleOutlineIcon
-                  onClick={addMoreQuestion}
-                  color="secondary"
-                />
-                <OndemandVideoIcon />
-                <CropOriginalIcon />
-                <TextFieldsIcon />
-              </div>
+              // <div className="question_edit">
+              //   <AddCircleOutlineIcon
+              //     onClick={addMoreQuestion}
+              //     color="secondary"
+              //   />
+              //   <OndemandVideoIcon />
+              //   <CropOriginalIcon />
+              //   <TextFieldsIcon />
+              // </div>
+            ""
             ) : (
               ""
             )}
@@ -282,12 +284,13 @@ function Questions() {
                   type="text"
                   className="question_form_top_name"
                   placeholder="Description"
-                
                 ></input>
 
-                <h5 type="text" className="question_form_top_desc">
-                  Description <EditIcon className="icon" />
-                </h5>
+                <input
+                  type="text"
+                  className="question_form_top_name"
+                  placeholder="Name"
+                ></input>
                 <div className="my_buttons">
                   {!isViewform ? (
                     <Button variant="contained" onClick={viewQuestionPaper}>

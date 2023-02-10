@@ -31,15 +31,20 @@
   border-bottom: 1px solid black;
 }
 
-.form_header_right {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
-@media screen and (Max-width:720px) {
+
+@media screen and (Max-width:480px) {
     .form_header{
         width: auto;
-        display: block;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+         
+       
+    
+    }
+    .span{
+      font-size: 12px ;
+      display: block;
     }
 }
