@@ -27,16 +27,16 @@ function Template() {
       </div>
       <div className="template_body">
         <div className="card">
-          <img src={blankImage} alt="not found" />
-          <span>Blank</span>
+          <img src={blankImage} alt="not found" className="card_image" />
+          <p className="card_title">Blank</p>
         </div>
         <div className="card">
-          <img src={PartyinviteImage} alt="not found" />
-          <span>Blank</span>
+          <img src={PartyinviteImage} alt="not found" className="card_image" />
+          <p className="card_title">Party Invite</p>
         </div>
         <div className="card">
-          <img src={ContactImage} alt="not found" />
-          <span>Blank</span>
+          <img src={ContactImage} alt="not found" className="card_image" />
+          <p className="card_title">Contact Form</p>
         </div>
       </div>
     </div>

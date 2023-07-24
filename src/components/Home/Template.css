@@ -14,14 +14,15 @@
 
 .template_left {
   flex: 1; /* Take 50% of the available width */
-  margin-left: 5%; /* Adjust the margin as needed */
+  margin-left: 12%; /* Adjust the margin as needed */
 }
 
 .template_right {
   flex: 1; /* Take 50% of the available width */
   display: flex;
   justify-content: flex-end; /* Align content to the right */
-  margin-right: 5%; /* Adjust the margin as needed */
+  margin-right: 7%; /* Adjust the margin as needed */
+
 }
 
 .gallery_button{
@@ -29,4 +30,38 @@
     justify-content: space-between;
     align-items: center;
     background: transparent;
+}
+
+.card{
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.template_body {
+  display: flex;
+  margin-left: 160px;
+  margin-right: 160px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; /* Align items vertically in the center */
+}
+
+.card_image{
+    box-sizing: border-box;
+    height: 120px;
+    width: 140px;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 0.2px solid #FFFDF7;
+}
+.card_image:hover{
+    border: 1px solid #6E2594;
+}
+
+.card_title{
+    font-size: 14px;
+    margin-top: 2px;
+    color: #202124;
+    font-weight: 500;
+    text-align: center;
 }

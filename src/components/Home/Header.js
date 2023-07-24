@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AppsIcon from "@mui/icons-material/Apps";
 import Avatar from "@mui/material/Avatar";
-import avatarImage from "../../images/form.png";
+import avatarImage from "../../images/avatar860.avif";
 import SideBar from "./sidebar.js";
 function Header() {
   return (
