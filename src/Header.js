@@ -1,37 +1,34 @@
-import styles from "./Header.module.css";
+import React from "react";
+import classes from "./Header.module.css";
+import formimage from "./images/goforms.png";
+import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
-import DescriptionIcon from "@mui/icons-material/Description";
 import SearchIcon from "@mui/icons-material/Search";
 import AppsIcon from "@mui/icons-material/Apps";
-import SideBar from "./sidebar";
-function Header(props) {
-  const formHandler = (e) => {
-    alert(props.forms);
-  };
-
+import Avatar from "@mui/material/Avatar";
+import avatarImage from "./images/form.png";
+function Header() {
   return (
-    <div className={styles.header}>
-      <SideBar />
-      <div className={styles.header_info}>
-        {/* single EventHandler */}
-        <IconButton onClick={formHandler}>
-          <DescriptionIcon color="secondary" />
-          <span className={styles.info}>Forms</span>
-        </IconButton>
-      </div>
-      <div className={styles.search}>
-        <SearchIcon
-          sx={{
-            position: "relative",
-            top: "8px",
-            size: "8em",
-          }}
-        />
-        <input type="search" placeholder="search" />
-      </div>
-      <div className={styles.right}>
+    <div className={classes.header}>
+      <div className={classes.info}>
         <IconButton>
-          <AppsIcon color="secondary" />
+          <MenuIcon />
+        </IconButton>
+        <img src={formimage} alt="No image" />
+        <div className={classes.formsInfo}>Forms</div>
+      </div>
+      <div className={classes.search}>
+        <IconButton>
+          <SearchIcon />
+        </IconButton>
+        <input type="text" name="search" placeholder="search" />
+      </div>
+      <div className="header_right">
+        <IconButton>
+          <AppsIcon />
+        </IconButton>
+        <IconButton>
+          <Avatar src={avatarImage} />
         </IconButton>
       </div>
     </div>
