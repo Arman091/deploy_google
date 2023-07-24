@@ -1,20 +1,18 @@
 import React from "react";
 import classes from "./Header.module.css";
-import formimage from "./images/goforms.png";
-import MenuIcon from "@mui/icons-material/Menu";
+import formimage from "../../images/goforms.png";
 import { IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AppsIcon from "@mui/icons-material/Apps";
 import Avatar from "@mui/material/Avatar";
-import avatarImage from "./images/form.png";
+import avatarImage from "../../images/form.png";
+import SideBar from "./sidebar.js";
 function Header() {
   return (
     <div className={classes.header}>
       <div className={classes.info}>
-        <IconButton>
-          <MenuIcon />
-        </IconButton>
-        <img src={formimage} alt="No image" />
+       <SideBar/>
+        <img src={formimage} alt="" />
         <div className={classes.formsInfo}>Forms</div>
       </div>
       <div className={classes.search}>

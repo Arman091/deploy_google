@@ -1,0 +1,32 @@
+
+.template_section {
+  background-color: #f4f4f9;
+  padding-bottom: 40px;
+  padding-top: 7px;
+}
+
+.template_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align items vertically in the center */
+  font-weight: bold;
+}
+
+.template_left {
+  flex: 1; /* Take 50% of the available width */
+  margin-left: 5%; /* Adjust the margin as needed */
+}
+
+.template_right {
+  flex: 1; /* Take 50% of the available width */
+  display: flex;
+  justify-content: flex-end; /* Align content to the right */
+  margin-right: 5%; /* Adjust the margin as needed */
+}
+
+.gallery_button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+}
