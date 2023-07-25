@@ -5,7 +5,7 @@ import Header from "./components/Home/Header";
 import Template from "./components/Home/Template";
 import MainBody from "./components/Home/mainBody";
 import FormHeader from "./components/Forms/FormHeader";
-
+import FormTab from "./components/Forms/Tab";
 function App() {
   let HomeComponent = (
     <div>
@@ -14,12 +14,19 @@ function App() {
       <MainBody />
     </div>
   );
+
+  let CompleteForm = (
+    <div>
+      <FormHeader />
+      <FormTab/>
+    </div>
+  )
   return (
     <>
       <Router>
         <Routes>
           <Route path="/" element={HomeComponent} />
-          <Route path="/form/:id" element={<FormHeader />} />
+          <Route path="/form/:id" element={CompleteForm} />
         </Routes>
       </Router>
     </>
