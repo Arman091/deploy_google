@@ -5,7 +5,7 @@ import Header from "./components/Home/Header";
 import Template from "./components/Home/Template";
 import MainBody from "./components/Home/mainBody";
 import FormHeader from "./components/Forms/FormHeader";
-import FormTab from "./components/Forms/Tab";
+import FormTab from "./components/Forms/FormTab";
 function App() {
   let HomeComponent = (
     <div>
