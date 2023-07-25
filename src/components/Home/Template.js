@@ -6,7 +6,14 @@ import blankImage from "../../images/plus-sign.png";
 import PartyinviteImage from "../../images/invite2.png";
 import ContactImage from "../../images/contact-form.webp";
 import "./Template.css";
+import uuid from "react-uuid";
+import { useNavigate } from "react-router-dom";
 function Template() {
+  const navigate = useNavigate();
+  let createFormHandler = () => {
+    let id = uuid();
+    navigate("/form/"+id);
+ }
   return (
     <div className="template_section">
       <div className="template_top">
@@ -26,7 +33,7 @@ function Template() {
         </div>
       </div>
       <div className="template_body">
-        <div className="card">
+        <div className="card" onClick={createFormHandler}>
           <img src={blankImage} alt="not found" className="card_image" />
           <p className="card_title">Blank</p>
         </div>
