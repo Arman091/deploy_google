@@ -18,13 +18,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import FilterNoneIcon from "@mui/icons-material/FilterNone";
 // icons above imported
 import { FcRightUp } from "react-icons/fc";
-import { BsFileText, BsTrash } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+// imported components and services 
+import { setQuestions, setDocName, setDocDesc } from "../../services/action";
 import "./Question_Form.css";
 import SavedQuestion from "./SavedQuestion";
 import AddQuesType from "./AddQuesType";
 import AddOption from "./AddOption";
-
+import ChooseAnswer from "./Answer";
 function QuestionForm() {
   const [questions, setquestions] = useState([
     {
@@ -44,6 +48,39 @@ function QuestionForm() {
     },
   ]);
 
+  // Events to Handle Form Submission
+  const [description, setDescription] = useState("");
+  const [formTitle, setFormTitle] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function handleDescriptionChange(e) {
+    setDescription(e.target.value);
+  }
+
+  function handleFormTitleChange(e) {
+    setFormTitle(e.target.value);
+  }
+
+  function handleSaveForm() {
+    if (description.trim() === "") {
+      alert("Description cannot be empty");
+      return;
+    }
+
+    if (formTitle.trim() === "") {
+      alert("Form Title cannot be empty");
+      return;
+    }
+    else {
+      dispatch(setQuestions(questions));
+      dispatch(setDocName(formTitle));
+      dispatch(setDocDesc(description));
+      navigate("/")
+    }
+  }
+
+  // Form editing Related Events
   function setOptionAnswer(ans, qno) {
     let Questions = [...questions];
     Questions[qno].answerKey = ans;
@@ -89,12 +126,11 @@ function QuestionForm() {
     let newQuestion = [...questions];
     newQuestion[i].questionText = text;
     setquestions(newQuestion);
-    console.log(newQuestion);
   }
 
   function addQuestionType(i, type) {
     let qs = [...questions];
-    console.log(type);
+
     qs[i].questionType = type;
     setquestions(qs);
   }
@@ -103,7 +139,6 @@ function QuestionForm() {
     let optionsQuestion = [...questions];
     optionsQuestion[i].options[j].optionText = text;
     setquestions(optionsQuestion);
-    console.log(optionsQuestion);
   }
 
   function removeOption(i, j) {
@@ -150,7 +185,6 @@ function QuestionForm() {
   function requiredQuestion(i) {
     let reqQuestion = [...questions];
     reqQuestion[i].required = !reqQuestion[i].required;
-    console.log(reqQuestion[i].required + "" + i);
     setquestions(reqQuestion);
   }
 
@@ -166,7 +200,6 @@ function QuestionForm() {
       },
     ]);
   }
-
   function questionsUI() {
     return questions.map((ques, i) => (
       <div>
@@ -247,7 +280,9 @@ function QuestionForm() {
                         fontSize: "13px",
                         fontWeight: "660",
                       }}
-                      onClick={()=>{AddAnswer(i)}}
+                      onClick={() => {
+                        AddAnswer(i);
+                      }}
                     >
                       <FcRightUp style={{ marginRight: "8px" }} />
                       Answer Key
@@ -287,100 +322,15 @@ function QuestionForm() {
                 </div>
               </AccordionDetails>
             ) : (
+              // add option yahan se todo
               <AccordionDetails className="add_question">
-                <div className="top_header">Choose Correct Answer</div>
-                <div>
-                  <div className="add_question_top">
-                    <input
-                      type="text"
-                      className="question"
-                      placeholder="Question"
-                      value={ques.questionText}
-                      disabled
-                    />
-                    <input
-                      type="number"
-                      className="points"
-                      min="0"
-                        step="1"
-                        max="4"
-                      placeholder="0"
-                      onChange={(e) => {
-                        setOptionPoints(e.target.value, i);
-                      }}
-                    />
-                  </div>
-                  {ques.options.map((op, j) => (
-                    <div
-                      className="add_question_body"
-                      key={j}
-                      style={{
-                        marginLeft: "8px",
-                        marginBottom: "10px",
-                        marginTop: "5px",
-                      }}
-                    >
-                      <div key={j}>
-                        <div style={{ display: "flex" }}>
-                          <div className="form-check">
-                            <label
-                              style={{ fontSize: "13px" }}
-                              onClick={() => {
-                                setOptionAnswer(ques.options[j].optionText, i);
-                              }}
-                            >
-                              {ques.questionType !== "text" ? (
-                                <input
-                                  type={ques.questionType}
-                                  name={ques.questionText}
-                                  value="option 3"
-                                  className="form-check-input"
-                                  required={ques.required}
-                                  style={{
-                                    marginRight: "10px",
-                                    marginBottom: "10px",
-                                    marginTop: "5px",
-                                  }}
-                                />
-                              ) : (
-                                <ShortTextIcon
-                                  style={{ marginRight: "10px" }}
-                                />
-                              )}
-
-                              {ques.options[j].optionText}
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                  <div className="add_question_body">
-                    <Button
-                      size="small"
-                      style={{
-                        textTransform: "none",
-                        color: "#4285f4",
-                        fontSize: "13px",
-                        fontWeight: "600px",
-                      }}
-                    >
-                      <BsFileText
-                        style={{ fontSize: "20px", marginRight: "8px" }}
-                      />
-                      Add Answer Feedback
-                    </Button>
-                  </div>
-                  <div className="add_question_bottom">
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      onClick={() => {
-                        doneAnswer(i);
-                      }}
-                    > Done</Button>
-                  </div>
-                </div>
+                <ChooseAnswer
+                  ques={questions[i]}
+                  i={i}
+                  setOptionPoints={setOptionPoints}
+                  setOptionAnswer={setOptionAnswer}
+                  doneAnswer={doneAnswer}
+                />
               </AccordionDetails>
             )}
 
@@ -416,15 +366,30 @@ function QuestionForm() {
                 className="question_form_top_name"
                 style={{ color: "black" }}
                 placeholder="Untitled document"
+                value={formTitle}
+                onChange={handleFormTitleChange}
               ></input>
               <input
                 type="text"
                 className="question_form_top_desc"
-                placeholder="Form Description"
+                placeholder=" change Form Description"
+                value={description}
+                onChange={handleDescriptionChange}
               ></input>
             </div>
           </div>
           {questionsUI()}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "9px",
+          }}
+        >
+          <Button variant="contained" color="primary" onClick={handleSaveForm}>
+            SAVE Form
+          </Button>
         </div>
       </div>
     </div>
