@@ -23,19 +23,6 @@ function SavedQuestion(props) {
       {question.options.map((option, j) => (
         <div key={j}>
           <div style={{ display: "flex" }}>
-            {/* <FormControlLabel
-              style={{ marginLeft: "5px", marginBottom: "5px" }}
-              disabled
-              control={
-                <input
-                  type={question.questionType}
-                  color="primary"
-                  style={{ marginRight: "3px" }}
-                  required={question.required}
-                />
-              }
-              label={option.optionText}
-            /> */}
             {question.questionType !== "text" ? (
               <FormControlLabel
                 style={{ marginLeft: "5px", marginBottom: "5px" }}

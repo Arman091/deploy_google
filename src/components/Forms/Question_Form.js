@@ -3,7 +3,6 @@ import {
   AccordionSummary,
   AccordionDetails,
   Accordion,
-  FormControlLabel,
   Button,
   Switch,
 } from "@mui/material";
@@ -19,16 +18,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import FilterNoneIcon from "@mui/icons-material/FilterNone";
 // icons above imported
 import { FcRightUp } from "react-icons/fc";
-import { BsTrash } from "react-icons/bs";
+import { BsFileText, BsTrash } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import "./Question_Form.css";
 import SavedQuestion from "./SavedQuestion";
 import AddQuesType from "./AddQuesType";
+import AddOption from "./AddOption";
 
 function QuestionForm() {
   const [questions, setquestions] = useState([
     {
-      questionText: "Write Your Question Here",
+      questionText: "",
       questionType: "radio",
       options: [
         { optionText: "" },
@@ -36,11 +36,37 @@ function QuestionForm() {
         { optionText: "" },
         { optionText: "" },
       ],
+      answer: false,
+      answerKey: "",
+      points: 0,
       open: true,
       required: false,
     },
   ]);
 
+  function setOptionAnswer(ans, qno) {
+    let Questions = [...questions];
+    Questions[qno].answerKey = ans;
+    setquestions(Questions);
+  }
+
+  function setOptionPoints(points, qno) {
+    let Questions = [...questions];
+    Questions[qno].points = points;
+    setquestions(Questions);
+  }
+
+  function doneAnswer(i) {
+    let answerOfQuestion = [...questions];
+    answerOfQuestion[i].answer = !answerOfQuestion[i].answer;
+    setquestions(answerOfQuestion);
+  }
+
+  function AddAnswer(i) {
+    let answerOfQuestion = [...questions];
+    answerOfQuestion[i].answer = !answerOfQuestion[i].answer;
+    setquestions(answerOfQuestion);
+  }
   function toggleAll() {
     let qs = [...questions];
     for (let i = 0; i < qs.length; i++) {
@@ -160,8 +186,8 @@ function QuestionForm() {
             {/* =++++==++++=== SAVED Questions COMPONENT BEING RENDERED ===========++++++++= */}
             {!ques.open ? <SavedQuestion question={ques} index={i} /> : ""}
           </AccordionSummary>
-          {questions[i].open ? (
-            <div className="question_boxes">
+          <div className="question_boxes">
+            {!questions[i].answer ? (
               <AccordionDetails className="add_question">
                 {/* AddQuesType component */}
                 <AddQuesType
@@ -181,6 +207,7 @@ function QuestionForm() {
                     ) : (
                       <ShortTextIcon style={{ marginRight: "10px" }} />
                     )}
+
                     <div>
                       <input
                         type="text"
@@ -192,6 +219,7 @@ function QuestionForm() {
                         }}
                       ></input>
                     </div>
+
                     <CropOriginalIcon style={{ color: "#5f6368" }} />
                     <IconButton aria-label="delete">
                       <CloseIcon
@@ -204,48 +232,7 @@ function QuestionForm() {
                 ))}
 
                 {ques.options.length < 5 ? (
-                  <div className="add_question_body">
-                    <FormControlLabel
-                      disabled
-                      control={
-                        ques.questionType !== "text" ? (
-                          <input
-                            type={ques.questionType}
-                            color="primary"
-                            inputprops={{ "aria-label": "secondary checkbox" }}
-                            style={{ marginLeft: "10px", marginRight: "10px" }}
-                            disabled
-                          />
-                        ) : (
-                          <ShortTextIcon style={{ marginRight: "10px" }} />
-                        )
-                      }
-                      label={
-                        <div>
-                          <input
-                            type="text"
-                            className="text_input"
-                            style={{ fontSize: "13px", width: "60px" }}
-                            placeholder="Add other"
-                          ></input>{" "}
-                          <Button
-                            size="small"
-                            style={{
-                              textTransform: "none",
-                              color: "#4285f4",
-                              fontSize: "13px",
-                              fontweight: "600",
-                            }}
-                            onClick={() => {
-                              addOption(i);
-                            }}
-                          >
-                            Add Option
-                          </Button>
-                        </div>
-                      }
-                    />
-                  </div>
+                  <AddOption index={i} ques={ques} addOption={addOption} />
                 ) : (
                   ""
                 )}
@@ -260,6 +247,7 @@ function QuestionForm() {
                         fontSize: "13px",
                         fontWeight: "660",
                       }}
+                      onClick={()=>{AddAnswer(i)}}
                     >
                       <FcRightUp style={{ marginRight: "8px" }} />
                       Answer Key
@@ -298,6 +286,105 @@ function QuestionForm() {
                   </div>
                 </div>
               </AccordionDetails>
+            ) : (
+              <AccordionDetails className="add_question">
+                <div className="top_header">Choose Correct Answer</div>
+                <div>
+                  <div className="add_question_top">
+                    <input
+                      type="text"
+                      className="question"
+                      placeholder="Question"
+                      value={ques.questionText}
+                      disabled
+                    />
+                    <input
+                      type="number"
+                      className="points"
+                      min="0"
+                        step="1"
+                        max="4"
+                      placeholder="0"
+                      onChange={(e) => {
+                        setOptionPoints(e.target.value, i);
+                      }}
+                    />
+                  </div>
+                  {ques.options.map((op, j) => (
+                    <div
+                      className="add_question_body"
+                      key={j}
+                      style={{
+                        marginLeft: "8px",
+                        marginBottom: "10px",
+                        marginTop: "5px",
+                      }}
+                    >
+                      <div key={j}>
+                        <div style={{ display: "flex" }}>
+                          <div className="form-check">
+                            <label
+                              style={{ fontSize: "13px" }}
+                              onClick={() => {
+                                setOptionAnswer(ques.options[j].optionText, i);
+                              }}
+                            >
+                              {ques.questionType !== "text" ? (
+                                <input
+                                  type={ques.questionType}
+                                  name={ques.questionText}
+                                  value="option 3"
+                                  className="form-check-input"
+                                  required={ques.required}
+                                  style={{
+                                    marginRight: "10px",
+                                    marginBottom: "10px",
+                                    marginTop: "5px",
+                                  }}
+                                />
+                              ) : (
+                                <ShortTextIcon
+                                  style={{ marginRight: "10px" }}
+                                />
+                              )}
+
+                              {ques.options[j].optionText}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="add_question_body">
+                    <Button
+                      size="small"
+                      style={{
+                        textTransform: "none",
+                        color: "#4285f4",
+                        fontSize: "13px",
+                        fontWeight: "600px",
+                      }}
+                    >
+                      <BsFileText
+                        style={{ fontSize: "20px", marginRight: "8px" }}
+                      />
+                      Add Answer Feedback
+                    </Button>
+                  </div>
+                  <div className="add_question_bottom">
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => {
+                        doneAnswer(i);
+                      }}
+                    > Done</Button>
+                  </div>
+                </div>
+              </AccordionDetails>
+            )}
+
+            {!ques.answer ? (
               <div className="question_edit">
                 <IconButton>
                   <AddCircleOutlineIcon
@@ -309,10 +396,10 @@ function QuestionForm() {
                 <CropOriginalIcon className="edit" />
                 <TextFieldsIcon className="edit" />
               </div>
-            </div>
-          ) : (
-            ""
-          )}
+            ) : (
+              ""
+            )}
+          </div>
         </Accordion>
       </div>
     ));
