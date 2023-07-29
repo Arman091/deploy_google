@@ -6,7 +6,6 @@ import Template from "./components/Home/Template";
 import MainBody from "./components/Home/mainBody";
 import FormHeader from "./components/Forms/FormHeader";
 import FormTab from "./components/Forms/FormTab";
-import QuestionForm from "./components/Forms/Question_Form";
 function App() {
   let HomeComponent = (
     <div>
@@ -20,7 +19,6 @@ function App() {
     <div>
       <FormHeader />
       <FormTab />
-      <QuestionForm/>
     </div>
   )
   return (

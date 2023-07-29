@@ -19,11 +19,11 @@ import FilterNoneIcon from "@mui/icons-material/FilterNone";
 // icons above imported
 import { FcRightUp } from "react-icons/fc";
 import { BsTrash } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate,useParams } from "react-router";
 // imported components and services 
-import { setQuestions, setDocName, setDocDesc } from "../../services/action";
+import { addForm } from "../../services/action";
 import "./Question_Form.css";
 import SavedQuestion from "./SavedQuestion";
 import AddQuesType from "./AddQuesType";
@@ -53,6 +53,7 @@ function QuestionForm() {
   const [formTitle, setFormTitle] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams();
 
   function handleDescriptionChange(e) {
     setDescription(e.target.value);
@@ -73,9 +74,7 @@ function QuestionForm() {
       return;
     }
     else {
-      dispatch(setQuestions(questions));
-      dispatch(setDocName(formTitle));
-      dispatch(setDocDesc(description));
+     dispatch(addForm(questions,description,formTitle,id))
       navigate("/")
     }
   }
@@ -215,13 +214,14 @@ function QuestionForm() {
             id="panella-header"
             elevation={1}
             style={{ width: "100%", marginTop: "9px" }}
+          
           >
             {/* =++++==++++=== SAVED Questions COMPONENT BEING RENDERED ===========++++++++= */}
             {!ques.open ? <SavedQuestion question={ques} index={i} /> : ""}
           </AccordionSummary>
           <div className="question_boxes">
             {!questions[i].answer ? (
-              <AccordionDetails className="add_question">
+              <AccordionDetails className="add_question" >
                 {/* AddQuesType component */}
                 <AddQuesType
                   changeQuestion={changeQuestion}
@@ -322,8 +322,8 @@ function QuestionForm() {
                 </div>
               </AccordionDetails>
             ) : (
-              // add option yahan se todo
-              <AccordionDetails className="add_question">
+              // Adding Answer Component
+              <AccordionDetails className="add_question" >
                 <ChooseAnswer
                   ques={questions[i]}
                   i={i}

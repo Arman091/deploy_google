@@ -8,6 +8,7 @@ import Avatar from "@mui/material/Avatar";
 import avatarImage from "../../images/avatar860.avif";
 import SideBar from "./sidebar.js";
 function Header() {
+  
   return (
     <div className={classes.header}>
       <div className={classes.info}>
