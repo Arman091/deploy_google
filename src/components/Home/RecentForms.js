@@ -1,28 +1,19 @@
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import GroupImage from "../../images/Group.jpg";
 import StorageIcon from "@mui/icons-material/Storage";
-import "./mainBody.css";
-import Modal from "../UI/Model";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./mainBody.css";
+
 function RecentForm(props) {
-  const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
-  const handleOpenModal = () => {
-    setModalOpen(true);
+  const handleOpenForm = () => {
+    let id = props.doc_id;
+    navigate("/viewForm/" + id);
   };
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
-    function handleEditForm() {
-   
-  }
-  function handleAnswerForm() {}
   return (
     <>
-      <div className="doc_card" onClick={handleOpenModal}>
+      <div className="doc_card" onClick={handleOpenForm}>
         <img src={GroupImage} className="doc_image" alt="noT Found" />
         <div className="doc_card_content">
           <h5>Form Name:{props.doc_name}</h5>
@@ -48,13 +39,6 @@ function RecentForm(props) {
           </div>
         </div>
       </div>
-      {isModalOpen && (
-        <Modal
-          onEditForm={handleEditForm}
-          onAnswerForm={handleAnswerForm}
-          handleCloseModal={handleCloseModal}
-        />
-      )}
     </>
   );
 }

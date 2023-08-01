@@ -33,7 +33,13 @@ function Mainbody() {
       </div>
       <div className="main_body_forms">
         {forms.map((form, index) => (
-          <RecentForm doc_name={form.doc_name} doc_desc={form.doc_desc} doc_id={form.form_id } key={index} />
+          <RecentForm
+            doc_name={form.doc_name}
+            doc_desc={form.doc_desc}
+            doc_id={form.form_id}
+            key={index}
+            questions={form.questions}
+          />
         ))}
       </div>
     </div>
