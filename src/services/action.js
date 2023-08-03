@@ -1,29 +1,31 @@
-
-import { ADD_FORM,DELETE_FORM,SET_DOC_DESC,SET_DOC_NAME } from "./constants";
-export let initialState = [{
-
-  questions:[],
-  doc_name:"",
-  doc_desc: "",
-  form_id:""
-}];
-
+import {
+  ADD_FORM,
+  DELETE_FORM,
+  SET_DOC_DESC,
+  SET_DOC_NAME,
+} from "./constants";
+export let initialState = [
+  {
+    questions: [],
+    doc_name: "",
+    doc_desc: "",
+    form_id: "",
+  },
+];
 
 // Action to add a new form
-export const addForm = (questions,doc_name,doc_desc,form_id) => ({
+export const addForm = (questions, doc_name, doc_desc, form_id) => ({
   type: ADD_FORM,
   questions,
   doc_name,
   doc_desc,
   form_id,
-
 });
 
 // Action to delete a form by index
 export const deleteForm = (formIndex) => ({
   type: DELETE_FORM,
   formIndex,
-
 });
 
 // Action to set document name
@@ -38,9 +40,8 @@ export const setDocDesc = (doc_desc) => ({
   doc_desc,
 });
 
-
 //REDUCER FUNCTION
-const rootReducer = (state=[], action) => {
+const rootReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_FORM:
       return [
@@ -49,7 +50,7 @@ const rootReducer = (state=[], action) => {
           questions: action.questions,
           doc_name: action.doc_name,
           doc_desc: action.doc_desc,
-          form_id:action.form_id,
+          form_id: action.form_id,
         },
       ];
 
@@ -69,7 +70,7 @@ const rootReducer = (state=[], action) => {
           ? { ...form, doc_desc: action.doc_desc }
           : form
       );
-
+    
     default:
       return state;
   }

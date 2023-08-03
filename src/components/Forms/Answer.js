@@ -21,7 +21,7 @@ function ChooseAnswer(props) {
           <input
             type="number"
             className="points"
-            min="0"
+            min="1"
             step="1"
             max="4"
             placeholder="0"

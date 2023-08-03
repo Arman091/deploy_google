@@ -21,8 +21,8 @@ import { FcRightUp } from "react-icons/fc";
 import { BsTrash } from "react-icons/bs";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate,useParams } from "react-router";
-// imported components and services 
+import { useNavigate, useParams } from "react-router";
+// imported components and services
 import { addForm } from "../../services/action";
 import "./Question_Form.css";
 import SavedQuestion from "./SavedQuestion";
@@ -34,12 +34,7 @@ function QuestionForm() {
     {
       questionText: "",
       questionType: "radio",
-      options: [
-        { optionText: "" },
-        { optionText: "" },
-        { optionText: "" },
-        { optionText: "" },
-      ],
+      options: [{ optionText: "" }],
       answer: false,
       answerKey: "",
       points: 0,
@@ -72,10 +67,9 @@ function QuestionForm() {
     if (formTitle.trim() === "") {
       alert("Form Title cannot be empty");
       return;
-    }
-    else {
-     dispatch(addForm(questions,description,formTitle,id))
-      navigate("/")
+    } else {
+      dispatch(addForm(questions, description, formTitle, id));
+      navigate("/");
     }
   }
 
@@ -138,6 +132,7 @@ function QuestionForm() {
     let optionsQuestion = [...questions];
     optionsQuestion[i].options[j].optionText = text;
     setquestions(optionsQuestion);
+    text = "";
   }
 
   function removeOption(i, j) {
@@ -151,7 +146,7 @@ function QuestionForm() {
     let quesoption = [...questions];
     if (quesoption[i].options.length < 5) {
       quesoption[i].options.push({
-        optionText: `option${quesoption[i].options.length + 1}`,
+        
       });
     } else {
       alert("max-5 questions");
@@ -214,14 +209,13 @@ function QuestionForm() {
             id="panella-header"
             elevation={1}
             style={{ width: "100%", marginTop: "9px" }}
-          
           >
             {/* =++++==++++=== SAVED Questions COMPONENT BEING RENDERED ===========++++++++= */}
             {!ques.open ? <SavedQuestion question={ques} index={i} /> : ""}
           </AccordionSummary>
           <div className="question_boxes">
             {!questions[i].answer ? (
-              <AccordionDetails className="add_question" >
+              <AccordionDetails className="add_question">
                 {/* AddQuesType component */}
                 <AddQuesType
                   changeQuestion={changeQuestion}
@@ -323,7 +317,7 @@ function QuestionForm() {
               </AccordionDetails>
             ) : (
               // Adding Answer Component
-              <AccordionDetails className="add_question" >
+              <AccordionDetails className="add_question">
                 <ChooseAnswer
                   ques={questions[i]}
                   i={i}

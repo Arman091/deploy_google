@@ -81,3 +81,31 @@
   background-color: white;
   border-radius: 8px;
 }
+@media (max-width: 600px) {
+  .mainbody_top_right{
+    display: none;
+  }
+
+
+  .mainbody{
+    margin-left: 23px;
+    margin-right: 23px;
+  }
+
+  .mainbody_top_left{
+    margin: 0px auto;
+  }
+
+  .doc_card{
+    flex-basis: auto;
+    margin: 10px auto;
+    width: 80%;
+  }
+}
+
+/* Media query for screens between 601px and 900px wide */
+@media (min-width: 601px) and (max-width: 900px) {
+  .mainbody_top_right{
+    width: 220px;
+  }
+}

@@ -1,4 +1,3 @@
- 
 import SettingsIcon from "@mui/icons-material/Settings";
 import { IconButton } from "@mui/material";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
@@ -18,11 +17,7 @@ const FormHeader = () => {
     <>
       <div className="form_header">
         <div className="form_header_left">
-          <img
-            src={Formicon}
-            style={{ height: "37px", width: "36px", marginLeft: "23px" }}
-            alt="Error"
-          />
+          <img src={Formicon} alt="Error" className="form_header_left_image" />
           <input type="text" placeholder={id} className="form_name"></input>
           <FolderOpenIcon className="form_header_icon" />
           <span style={{ fontSize: "19px", fontWeight: "600" }}>
@@ -37,12 +32,17 @@ const FormHeader = () => {
           <IconButton>
             <SettingsIcon />
           </IconButton>
-          <Button variant="contained" color="primary" href="#contained-buttons">Send</Button>
+          <Button variant="contained" color="primary" href="#contained-buttons">
+            Send
+          </Button>
           <IconButton>
             <MoreVertIcon className="form_header_icon" />
           </IconButton>
           <IconButton>
-            <Avatar style={{ height: "40px", width: "40px" }} src={ avatarImage} />
+            <Avatar
+              style={{ height: "40px", width: "40px" }}
+              src={avatarImage}
+            />
           </IconButton>
         </div>
       </div>
@@ -51,5 +51,3 @@ const FormHeader = () => {
 };
 
 export default FormHeader;
-
-

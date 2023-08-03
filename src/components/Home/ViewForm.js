@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
-import SavedQuestion from "../Forms/SavedQuestion";
 import "../Forms/Question_Form.css";
+import SavedQuestion from "../Forms/SavedQuestion";
+
 function ViewForm() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ function ViewForm() {
           <div
             style={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "space-evenly",
               marginTop: "9px",
             }}
           >
@@ -60,6 +61,9 @@ function ViewForm() {
               onClick={closeFormHandler}
             >
               Close
+            </Button>
+            <Button variant="contained" color="primary">
+              Share
             </Button>
           </div>
         </div>

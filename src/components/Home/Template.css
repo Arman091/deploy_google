@@ -65,3 +65,19 @@
     font-weight: 500;
     text-align: center;
 }
+
+
+/* media query */
+@media (max-width: 600px) {
+  .template_body{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Media query for screens between 601px and 900px wide */
+@media (min-width: 601px) and (max-width: 900px) {
+   .template_body{
+    margin-left: 40px;
+   }
+}
