@@ -1,5 +1,4 @@
 
-import { initialState } from "./action";
 import rootreducer from "./action";
 import { configureStore } from "@reduxjs/toolkit";
 
